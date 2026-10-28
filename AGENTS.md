@@ -16,3 +16,4 @@
 - The site is local-only: no network submission unless SITE_CONFIG endpoints are explicitly configured.
 
 - Material photo sources are centralized in src/lib/material-photos.ts and imported through asset pointers so labels and attribution share one registry.
+- Pre-optimize public hook-using control dependencies and reject outdated Vite dependency requests so a live preview cannot mix React dispatcher generations after edits.

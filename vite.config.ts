@@ -7,6 +7,14 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    optimizeDeps: {
+      // Keep hook-using controls in the initial dependency graph. Serving an
+      // outdated Slot alongside a newly optimized renderer splits React's dispatcher.
+      include: ["@radix-ui/react-slot", "lucide-react", "motion/react", "react-hook-form"],
+      ignoreOutdatedRequests: false,
+    },
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this

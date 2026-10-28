@@ -29,7 +29,7 @@ function Home() {
             <p className="mt-3 text-[20px]">Your home, considered from every angle.</p>
             <p className="mt-3 max-w-lg text-[15px]">Custom homes, major additions and whole-home renovations across metro Atlanta. One team draws the plan, chooses the materials with you and coordinates the build.</p>
             <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3">
-              <Link to="/explore-home" className="btn btn-solid">Watch a real home walkthrough</Link>
+              <Link to="/explore-home" className="btn btn-solid">Explore the home in 3D</Link>
               <Link to="/residences" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">View residences</Link>
             </div>
           </div>
@@ -69,7 +69,7 @@ function Home() {
             <h2 id="preview-title" className="text-[30px]">Watch a real home walkthrough</h2>
             <p className="mt-2 measure text-muted-foreground">Inside Alessandra Ambrosio’s home with Architectural Digest’s Open Door.</p>
           </div>
-          <Link to="/explore-home" className="font-semibold text-primary underline underline-offset-4">View the walkthrough</Link>
+          <Link to="/explore-home" className="font-semibold text-primary underline underline-offset-4">Explore the 3D home</Link>
         </div>
         <HomeWalkthrough />
       </section>

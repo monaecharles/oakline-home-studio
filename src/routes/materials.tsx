@@ -66,7 +66,7 @@ function Materials() {
   return (
     <>
       <PageIntro eyebrow="Material library" title="Materials & Finishes">
-        Photographic references for your own home. These are representative material samples, not specified products. Your saved inspiration board is separate from the walkthrough and does not change the house in the video.
+        Photographic references for your own home. These are representative material samples, not specified products. Your saved choices appear in the interactive 3D model, but do not change the house in the filmed reference.
       </PageIntro>
       <section className="wrap mt-8" aria-labelledby="board-title">
         <div className="flex flex-wrap items-center justify-between gap-4">

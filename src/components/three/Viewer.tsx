@@ -7,6 +7,10 @@ import { PHOTOS, photoUrl } from "@/lib/photos";
 import { FloorPlan } from "./FloorPlan";
 import type { RigApi } from "./Scene";
 import { HOME_VIEW } from "./scene-constants";
+import { Button } from "@/components/ui/button";
+import { HomeWalkthrough } from "@/components/site/HomeWalkthrough";
+import { MaterialPhoto } from "@/components/site/MaterialPhoto";
+import { ArrowLeft, ArrowRight, RotateCcw, RotateCw, ZoomIn, ZoomOut, Maximize } from "lucide-react";
 
 const Scene = lazy(() => import("./Scene"));
 
@@ -43,7 +47,8 @@ export function download(name: string, text: string, type = "text/plain") {
 
 export function Swatches({ room }: { room: RoomId }) {
   const s = useDesign();
-  const r = roomById(room)!;
+  const r = roomById(room);
+  if (!r) return null;
   return (
     <div className="space-y-4">
       {r.categories.map((cat) => (
@@ -53,7 +58,7 @@ export function Swatches({ room }: { room: RoomId }) {
             {FINISHES[cat].options.map((o) => {
               const on = s.design[room][cat] === o.id;
               return (
-                <button
+                <Button variant="ghost"
                   key={o.id}
                   type="button"
                   role="radio"
@@ -61,10 +66,10 @@ export function Swatches({ room }: { room: RoomId }) {
                   onClick={() => designStore.setFinish(room, cat, o.id)}
                   className={`flex min-h-[44px] items-center gap-2 border px-2 py-1 text-[14px] ${on ? "border-2 border-primary bg-secondary font-semibold" : "border-border bg-card"}`}
                 >
-                  <span className="h-6 w-6 border border-ink/30" style={{ background: o.color }} aria-hidden />
+                  <span className="h-8 w-8 overflow-hidden" aria-hidden><MaterialPhoto category={cat} id={o.id} /></span>
                   {o.name}
                   {on && <span aria-hidden>✓</span>}
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -86,6 +91,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
   const [visible, setVisible] = useState(true);
   const [full, setFull] = useState(false);
   const [tab, setTab] = useState<"finishes" | "photo">("finishes");
+  const [reference, setReference] = useState(false);
   const [compare, setCompare] = useState(false);
   const [msg, setMsg] = useState("");
   const rig = useRef<RigApi>(null);
@@ -162,11 +168,12 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
     navigate({ to: "/contact" });
   };
 
-  const tool = "btn btn-line min-h-[44px] bg-card px-3 text-[14px]";
+  const tool = "min-h-11 bg-card px-3 text-[14px] text-foreground";
+  const stopIndex = ROOMS.findIndex((r) => r.id === sel);
 
   return (
     <div
-      className={full ? "fixed inset-0 z-50 flex flex-col bg-background" : "border border-primary bg-card"}
+      className={full ? "fixed inset-0 z-50 flex flex-col bg-background" : "bg-background"}
       role={full ? "dialog" : undefined}
       aria-modal={full || undefined}
       aria-label={full ? "3D home viewer, full screen" : undefined}
@@ -174,14 +181,21 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
       {full && (
         <div className="flex items-center justify-between border-b border-primary px-4 py-2">
           <span className="font-display text-lg">Oakline home in 3D</span>
-          <button className="btn btn-solid" onClick={() => setFull(false)} autoFocus>Exit full screen</button>
+          <Button variant="ghost" className="btn btn-solid" onClick={() => setFull(false)} autoFocus>Exit full screen</Button>
         </div>
       )}
+      <div className="flex flex-wrap items-center gap-2 pb-4" aria-label="Home walkthrough">
+        <Button variant="outline" onClick={() => { select("living"); designStore.set({ mode: "3d" }); }}>Enter the home</Button>
+        <Button variant="ghost" aria-label="Previous room" title="Previous room" disabled={stopIndex <= 0} onClick={() => { const previous = ROOMS[stopIndex - 1]; if (previous) select(previous.id); }}><ArrowLeft /></Button>
+        <Button variant="ghost" aria-label="Next room" title="Next room" disabled={stopIndex === ROOMS.length - 1} onClick={() => { const next = ROOMS[stopIndex + 1]; if (next) select(next.id); }}><ArrowRight /></Button>
+        <Button variant="ghost" aria-expanded={reference} onClick={() => setReference((v) => !v)}>{reference ? "Hide filmed reference" : "Watch the filmed reference"}</Button>
+      </div>
+      {reference && <div className="pb-6"><HomeWalkthrough /></div>}
       <div className={`grid ${full ? "min-h-0 flex-1" : ""} ${compact ? "" : "lg:grid-cols-[65fr_35fr]"}`}>
         {/* Canvas column */}
-        <div className="flex min-w-0 flex-col border-b border-primary lg:border-b-0 lg:border-r">
+        <div className="flex min-w-0 flex-col">
           <nav aria-label="Viewer location" className="flex flex-wrap items-center gap-2 border-b border-border px-3 py-2 text-[14px]">
-            <button className={`underline-offset-4 ${sel ? "underline" : "font-semibold"}`} onClick={() => select(null)}>Whole home</button>
+            <Button variant="ghost" className={`underline-offset-4 ${sel ? "underline" : "font-semibold"}`} onClick={() => select(null)}>Whole home</Button>
             {room && (
               <>
                 <span aria-hidden>/</span>
@@ -190,9 +204,9 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
             )}
             <span className="ml-auto flex gap-1" role="group" aria-label="View mode">
               {(["3d", "plan"] as const).map((m) => (
-                <button key={m} aria-pressed={s.mode === m} onClick={() => designStore.set({ mode: m })} className={`min-h-[36px] border px-3 text-[14px] ${s.mode === m ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>
+                <Button variant="ghost" key={m} aria-pressed={s.mode === m} onClick={() => designStore.set({ mode: m })} className={`min-h-[36px] border px-3 text-[14px] ${s.mode === m ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>
                   {m === "3d" ? "3D" : "Plan"}
-                </button>
+                </Button>
               ))}
             </span>
           </nav>
@@ -238,15 +252,15 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
           </div>
           {s.mode === "3d" && canUse3D && (
             <div className="flex flex-wrap gap-2 border-t border-border p-2" role="toolbar" aria-label="Camera controls">
-              <button className={tool} onClick={() => rig.current?.rotate(-1)}>Rotate left</button>
-              <button className={tool} onClick={() => rig.current?.rotate(1)}>Rotate right</button>
-              <button className={tool} onClick={() => rig.current?.zoom(0.8)} aria-label="Zoom in">Zoom in</button>
-              <button className={tool} onClick={() => rig.current?.zoom(1.25)} aria-label="Zoom out">Zoom out</button>
-              <button className={tool} onClick={() => (sel ? rig.current?.goTo(room!.camera.position, room!.camera.target) : rig.current?.reset())}>Reset view</button>
-              <button className={tool} aria-pressed={s.roof} onClick={() => designStore.set({ roof: !s.roof })}>{s.roof ? "Roof on" : "Roof off"}</button>
-              <button className={tool} aria-pressed={s.cutaway} onClick={() => designStore.set({ cutaway: !s.cutaway })}>Cutaway</button>
-              <button className={tool} aria-pressed={s.evening} onClick={() => designStore.set({ evening: !s.evening })}>{s.evening ? "Evening" : "Daylight"}</button>
-              {!full && <button ref={fullBtn} className={tool} onClick={() => setFull(true)}>View full screen</button>}
+              <Button variant="ghost" className={tool} onClick={() => rig.current?.rotate(-1)} aria-label="Rotate left" title="Rotate left"><RotateCcw /></Button>
+              <Button variant="ghost" className={tool} onClick={() => rig.current?.rotate(1)} aria-label="Rotate right" title="Rotate right"><RotateCw /></Button>
+              <Button variant="ghost" className={tool} onClick={() => rig.current?.zoom(0.8)} aria-label="Zoom in" title="Zoom in"><ZoomIn /></Button>
+              <Button variant="ghost" className={tool} onClick={() => rig.current?.zoom(1.25)} aria-label="Zoom out" title="Zoom out"><ZoomOut /></Button>
+              <Button variant="ghost" className={tool} onClick={() => { if (room) rig.current?.goTo(room.camera.position, room.camera.target); else rig.current?.reset(); }}>Reset view</Button>
+              <Button variant="ghost" className={tool} aria-pressed={s.roof} onClick={() => designStore.set({ roof: !s.roof })}>{s.roof ? "Roof on" : "Roof off"}</Button>
+              <Button variant="ghost" className={tool} aria-pressed={s.cutaway} onClick={() => designStore.set({ cutaway: !s.cutaway })}>Cutaway</Button>
+              <Button variant="ghost" className={tool} aria-pressed={s.evening} onClick={() => designStore.set({ evening: !s.evening })}>{s.evening ? "Evening" : "Daylight"}</Button>
+              {!full && <Button ref={fullBtn} className={tool} onClick={() => setFull(true)} aria-label="View full screen" title="View full screen"><Maximize /></Button>}
             </div>
           )}
         </div>
@@ -254,11 +268,11 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
         {/* Controls column */}
         {!compact && (
           <div className={`min-w-0 ${full ? "overflow-y-auto" : ""}`}>
-            <section className="border-b border-border p-4 md:p-5" aria-label="Rooms">
+            <section className="p-4 md:p-5" aria-label="Rooms">
               <h2 className="text-[20px]">Rooms</h2>
               <div className="mt-3 grid grid-cols-2 gap-2">
                 {ROOMS.map((r) => (
-                  <button
+                  <Button variant="ghost"
                     key={r.id}
                     aria-pressed={sel === r.id}
                     onClick={() => select(r.id)}
@@ -267,7 +281,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                     className={`min-h-[44px] border px-3 text-left text-[14px] ${sel === r.id ? "border-2 border-primary bg-secondary font-semibold" : "border-border"}`}
                   >
                     {r.name}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </section>
@@ -278,7 +292,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="border-b border-border p-4 md:p-5"
+                className="p-4 md:p-5"
                 aria-live="polite"
               >
                 {room ? (
@@ -286,40 +300,40 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                     <h2 className="text-[22px]">{room.name}</h2>
                     <p className="mt-2 text-[15px] text-muted-foreground">{room.blurb}</p>
                     <div className="mt-3 flex flex-wrap gap-2">
-                      <button className="btn btn-line" onClick={() => select(null)}>Back to whole home</button>
-                      <button className="btn btn-line" aria-pressed={compare} onClick={() => setCompare((c) => !c)}>
+                      <Button variant="ghost" className="btn btn-line" onClick={() => select(null)}>Back to whole home</Button>
+                      <Button variant="ghost" className="btn btn-line" aria-pressed={compare} onClick={() => setCompare((c) => !c)}>
                         {compare ? "Showing original" : "Compare with original"}
-                      </button>
+                      </Button>
                     </div>
                     <div className="mt-4 flex border-b border-border" role="tablist">
                       {(["finishes", "photo"] as const).map((t) => (
-                        <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`min-h-[44px] px-4 text-[14px] ${tab === t ? "border-b-2 border-primary font-semibold" : ""}`}>
+                        <Button variant="ghost" key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`min-h-[44px] px-4 text-[14px] ${tab === t ? "border-b-2 border-primary font-semibold" : ""}`}>
                           {t === "finishes" ? "Finishes" : "Room photo"}
-                        </button>
+                        </Button>
                       ))}
                     </div>
                     <div className="pt-4" role="tabpanel">
                       {tab === "finishes" ? (
                         <Swatches room={room.id} />
                       ) : (
-                        <figure className="border border-border p-2">
+                        <figure className="">
                           <img src={photoUrl(room.photo, 960)} alt={PHOTOS[room.photo]?.alt ?? ""} loading="lazy" className="aspect-[3/2] w-full object-cover" />
                           <figcaption className="pt-2 text-[13px] text-muted-foreground">Inspiration photograph, not the 3D room.</figcaption>
                         </figure>
                       )}
                     </div>
-                    <button
+                    <Button variant="ghost"
                       className="mt-4 text-[14px] underline"
                       onClick={() => window.confirm(`Reset ${room.name} to its starting finishes?`) && designStore.resetRoom(room.id)}
                     >
                       Reset this room
-                    </button>
+                    </Button>
                   </>
                 ) : (
                   <>
                     <h2 className="text-[22px]">Whole home</h2>
                     <p className="mt-2 text-[15px] text-muted-foreground">
-                      A single-level plan of about 600 square feet of conditioned space shown here as a study model. Drag to rotate, then choose a room on the model, in the list or on the plan to step inside and change its finishes.
+                      An explorable architectural interpretation inspired by the filmed home. The layout and dimensions are not a measured reconstruction of Alessandra Ambrosio’s house.
                     </p>
                   </>
                 )}
@@ -331,12 +345,12 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                 {designSummary(s.design).split("\n").map((l) => <li key={l}>{l}</li>)}
               </ul>
               <div className="mt-3 flex flex-wrap gap-2">
-                <button className="btn btn-solid" onClick={useInInquiry}>Use this design in my inquiry</button>
-                <button className="btn btn-line" onClick={() => download("oakline-finish-schedule.json", JSON.stringify(finishSchedule(s.design), null, 2), "application/json")}>
+                <Button variant="ghost" className="btn btn-solid" onClick={useInInquiry}>Use this design in my inquiry</Button>
+                <Button variant="ghost" className="btn btn-line" onClick={() => download("oakline-finish-schedule.json", JSON.stringify(finishSchedule(s.design), null, 2), "application/json")}>
                   Download schedule
-                </button>
-                <button className="btn btn-line" onClick={() => window.print()}>Print summary</button>
-                <button
+                </Button>
+                <Button variant="ghost" className="btn btn-line" onClick={() => window.print()}>Print summary</Button>
+                <Button variant="ghost"
                   className="btn btn-line"
                   onClick={() => {
                     if (window.confirm("Clear every saved finish choice and return the home to its starting finishes?")) {
@@ -346,7 +360,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                   }}
                 >
                   Reset home
-                </button>
+                </Button>
               </div>
               <p className="mt-2 text-[13px] text-muted-foreground" role="status">
                 {msg || (s.storageOk ? "Choices are saved in this browser only." : "This browser is not allowing storage, so choices will clear when the page closes.")}

@@ -1,4 +1,6 @@
 # Oakline update
+- [ ] Restore the interactive model with room-to-room walkthrough controls and the official video reference; retain the unboxed layout.
+- [ ] Verify room navigation, material updates, persistence and model rendering.
 - [x] Remove decorative boxes around prose and photographs; retain necessary control boundaries.
 - [x] Replace public 3D experience and references with the credited official home walkthrough and original-video fallback.
 - [x] Use licensed real-house and material photography with accurate source information. Unverified species/alloys are replaced with generic labels; unavailable brass/black samples are not substituted with mismatched images.

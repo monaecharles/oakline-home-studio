@@ -137,11 +137,11 @@ export const DESIGN_VERSION = 1;
 
 export function finishColor(cat: Category, id: string | undefined) {
   const opts = FINISHES[cat].options;
-  return (opts.find((o) => o.id === id) ?? opts[0]).color;
+  return (opts.find((o) => o.id === id) ?? opts[0]!).color;
 }
 export function finishName(cat: Category, id: string | undefined) {
   const opts = FINISHES[cat].options;
-  return (opts.find((o) => o.id === id) ?? opts[0]).name;
+  return (opts.find((o) => o.id === id) ?? opts[0]!).name;
 }
 
 /** Validate untrusted stored data; returns a clean DesignState. */

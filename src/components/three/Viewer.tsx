@@ -20,14 +20,14 @@ function hasWebGL() {
 }
 
 class Boundary extends Component<{ onError: () => void; children: ReactNode }, { err: boolean }> {
-  state = { err: false };
+  override state = { err: false };
   static getDerivedStateFromError() {
     return { err: true };
   }
-  componentDidCatch() {
+  override componentDidCatch() {
     this.props.onError();
   }
-  render() {
+  override render() {
     return this.state.err ? null : this.props.children;
   }
 }
@@ -104,7 +104,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
   useEffect(() => {
     const el = wrap.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.01 });
+    const io = new IntersectionObserver(([e]) => setVisible(!!e?.isIntersecting), { threshold: 0.01 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -266,7 +266,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                 key={sel ?? "home"}
                 initial={reduceMotion ? false : { opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduceMotion ? undefined : { opacity: 0 }}
+                exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 className="border-b border-border p-4 md:p-5"
                 aria-live="polite"
@@ -293,7 +293,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                         <Swatches room={room.id} />
                       ) : (
                         <figure className="border border-border p-2">
-                          <img src={photoUrl(room.photo, 960)} alt={PHOTOS[room.photo].alt} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+                          <img src={photoUrl(room.photo, 960)} alt={PHOTOS[room.photo]?.alt ?? ""} loading="lazy" className="aspect-[3/2] w-full object-cover" />
                           <figcaption className="pt-2 text-[13px] text-muted-foreground">Inspiration photograph, not the 3D room.</figcaption>
                         </figure>
                       )}

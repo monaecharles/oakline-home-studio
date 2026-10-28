@@ -144,7 +144,7 @@ function Residences() {
               layout={!reduce}
               initial={reduce ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={reduce ? undefined : { opacity: 0 }}
+              exit={reduce ? { opacity: 1 } : { opacity: 0 }}
               className="section scroll-mt-20 border-b border-primary"
               aria-labelledby={`${s.id}-t`}
             >
@@ -163,9 +163,9 @@ function Residences() {
                   </nav>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Figure k={s.photos[0].k} caption={s.photos[0].caption} className="col-span-2" ratio="16/9" />
-                  <Figure k={s.photos[1].k} caption={s.photos[1].caption} ratio="4/3" sizes="(min-width:1024px) 25vw, 50vw" />
-                  <Figure k={s.photos[2].k} caption={s.photos[2].caption} ratio="4/3" sizes="(min-width:1024px) 25vw, 50vw" />
+                  <Figure k={s.photos[0]!.k} caption={s.photos[0]!.caption} className="col-span-2" ratio="16/9" />
+                  <Figure k={s.photos[1]!.k} caption={s.photos[1]!.caption} ratio="4/3" sizes="(min-width:1024px) 25vw, 50vw" />
+                  <Figure k={s.photos[2]!.k} caption={s.photos[2]!.caption} ratio="4/3" sizes="(min-width:1024px) 25vw, 50vw" />
                 </div>
               </div>
               <dl className="mt-6 grid border border-border md:grid-cols-3">

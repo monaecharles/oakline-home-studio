@@ -27,7 +27,7 @@ export const PHOTOS: Record<string, Photo> = Object.fromEntries(
 );
 
 export function photoUrl(key: string, w = 1600) {
-  return `https://images.unsplash.com/${PHOTOS[key].id}?auto=format&fit=crop&w=${w}&q=80`;
+  return `https://images.unsplash.com/${PHOTOS[key]!.id}?auto=format&fit=crop&w=${w}&q=80`;
 }
 export function photoSrcSet(key: string) {
   return [640, 960, 1280, 1600].map((w) => `${photoUrl(key, w)} ${w}w`).join(", ");

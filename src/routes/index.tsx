@@ -102,7 +102,7 @@ function Home() {
             <Link to="/materials" className="mt-3 inline-block font-semibold text-primary underline underline-offset-4">Browse materials</Link>
           </div>
           <ul className="grid grid-cols-3 gap-0 border border-border sm:grid-cols-6">
-            {[FINISHES.floor.options[0], FINISHES.floor.options[1], FINISHES.wall.options[2], FINISHES.cabinet.options[2], FINISHES.counter.options[1], FINISHES.fixture.options[0]].map((o, i) => (
+            {[FINISHES.floor.options[0], FINISHES.floor.options[1], FINISHES.wall.options[2], FINISHES.cabinet.options[2], FINISHES.counter.options[1], FINISHES.fixture.options[0]].filter((o) => !!o).map((o, i) => (
               <li key={i} className="border-border p-2 [&:not(:last-child)]:border-r">
                 <span className="block aspect-square border border-ink/20" style={{ background: o.color }} />
                 <span className="mt-1 block text-[13px]">{o.name}</span>

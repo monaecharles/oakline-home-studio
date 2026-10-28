@@ -6,7 +6,7 @@ import { pageHead } from "@/lib/site-config";
 
 export const Route = createFileRoute("/explore-home")({
   validateSearch: (s: Record<string, unknown>): { room?: RoomId } => {
-    const r = typeof s.room === "string" ? s.room : undefined;
+    const r = typeof s["room"] === "string" ? s["room"] : undefined;
     return ROOMS.some((x) => x.id === r) ? { room: r as RoomId } : {};
   },
   head: () =>

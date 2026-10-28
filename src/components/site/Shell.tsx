@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Wordmark } from "./Logo";
 import { PHOTOS } from "@/lib/photos";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { MATERIAL_PHOTOS } from "@/lib/material-photos";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -162,6 +163,7 @@ function Footer() {
               inspiration, not Oakline projects. The walkthrough is the official Architectural Digest video of Alessandra Ambrosio’s home, embedded from YouTube. Material photographs are representative samples, not product specifications.
             </p>
             <ul className="mt-3 max-h-48 overflow-auto text-[14px]">
+              {Object.entries(MATERIAL_PHOTOS).map(([key, photo]) => <li key={key}><a href={photo.source} className="underline" target="_blank" rel="noopener noreferrer">{photo.alt} · {photo.license}</a></li>)}
               {Object.values(PHOTOS).map((p) => (
                 <li key={p.key}>
                   <a className="underline" href={`https://unsplash.com/photos/${p.id.replace("photo-", "")}`} rel="noopener">{p.alt}</a>

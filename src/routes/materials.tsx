@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Figure, PageIntro } from "@/components/site/Figure";
 import { MaterialPhoto } from "@/components/site/MaterialPhoto";
 import { Button } from "@/components/ui/button";
-import { Check, Bookmark, Trash2 } from "lucide-react";
+import { Bookmark, Trash2 } from "lucide-react";
 import { designStore, useDesign } from "@/lib/design-store";
 import { materialPhoto } from "@/lib/material-photos";
 import { FINISHES, ROOMS, type Category } from "@/lib/rooms";
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/materials")({
     pageHead(
       "/materials",
       "Materials & Finishes | Oakline Custom Homes",
-      "Oak and walnut floors, ivory, greige and sage walls, oak, walnut and forest cabinetry, quartz and charcoal stone counters, brass and black hardware.",
+      "Save a room-by-room inspiration board with real photographs of wood grain, painted plaster, stone tile, stone surfaces and brushed metal.",
     ),
   component: Materials,
 });

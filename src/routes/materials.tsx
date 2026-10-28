@@ -108,8 +108,8 @@ function Materials() {
                       <p className="mt-1 text-[15px] text-muted-foreground">{o.note}</p>
                       <a className="mt-2 text-[12px] text-muted-foreground underline underline-offset-4" href={materialPhoto(cat, o.id).source} target="_blank" rel="noopener noreferrer">Representative material sample · Photo source</a>
                       <label className="mt-3 text-[14px] font-semibold" htmlFor={`apply-${cat}-${o.id}`}>Save for room</label>
-                      <div className="mt-1 flex gap-2">
-                        <select id={`apply-${cat}-${o.id}`} className="field min-w-0 flex-1 text-[15px]" defaultValue={rooms[0]?.id}>
+                      <div className="mt-1 flex flex-wrap gap-2">
+                        <select id={`apply-${cat}-${o.id}`} className="field min-w-0 basis-full text-[15px]" defaultValue={rooms[0]?.id}>
                           {rooms.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
                         </select>
                         <Button

@@ -12,7 +12,7 @@
 ## Oakline site
 - Room IDs/coordinates live only in src/lib/rooms.ts; 3D scene, SVG plan and swatches all read from it so they stay in sync.
 - Material inspiration choices use the existing external design store and browser storage to preserve room selections without connecting them to footage.
-- Public home exploration uses the shared official YouTube walkthrough component with a persistent original-video link; legacy 3D modules are not mounted by content routes.
+- Public home exploration mounts the lazy interactive 3D viewer, with the shared official YouTube reference available within it; keep the model identified as an approximate interpretation, not a measured scan.
 - The site is local-only: no network submission unless SITE_CONFIG endpoints are explicitly configured.
 
 - Material photo sources are centralized in src/lib/material-photos.ts and imported through asset pointers so labels and attribution share one registry.

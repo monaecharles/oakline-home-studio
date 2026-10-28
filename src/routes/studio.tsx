@@ -32,7 +32,7 @@ const TEAM = [
     role: "Materials coordinator",
     photo: "oakline-08",
     caption: "Sage paint, rattan and oak working together in one room.",
-    bio: "Evan runs the material library and the finish schedule. He pulls physical samples for each room, lays them out under daylight and warm evening light, and records every choice so the site crew builds exactly what was selected. He tracks lead times early so a backordered tile does not hold up a kitchen. He also keeps the 3D model's finishes in step with the samples clients approve.",
+    bio: "Evan runs the material library and the finish schedule. He pulls physical samples for each room, lays them out under daylight and warm evening light, and records every choice so the site crew builds exactly what was selected. He tracks lead times early so a backordered tile does not hold up a kitchen. He keeps the finish schedule in step with the samples clients approve.",
   },
 ];
 
@@ -45,9 +45,9 @@ function Studio() {
       <section className="wrap section" aria-label="Team">
         <div className="space-y-6">
           {TEAM.map((t, i) => (
-            <article key={t.name} className={`grid gap-0 border border-border lg:grid-cols-2 ${i % 2 ? "lg:[&>figure]:order-2" : ""}`}>
+            <article key={t.name} className={`grid gap-6 lg:grid-cols-2 ${i % 2 ? "lg:[&>figure]:order-2" : ""}`}>
               <Figure k={t.photo} caption={t.caption} className="border-0" ratio="16/10" />
-              <div className="flex flex-col justify-center p-5 md:p-7 lg:border-l">
+              <div className="flex flex-col justify-center p-5 md:p-7">
                 <p className="eyebrow">{t.role}</p>
                 <h2 className="mt-2 text-[30px]">{t.name}</h2>
                 <p className="mt-3 measure">{t.bio}</p>
@@ -57,13 +57,13 @@ function Studio() {
         </div>
       </section>
       <section className="wrap section pt-0" aria-labelledby="values">
-        <div className="grid gap-0 border-y border-primary md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {[
             ["Plans that fit the site", "We design to the lot you have, keeping trees, drainage and sun angles in mind from the first sketch."],
             ["Decisions in writing", "Every selection and every change is recorded, with its cost, before work proceeds."],
             ["Materials that age well", "We favor wood, stone and metal finishes that wear in rather than wear out."],
           ].map(([t, d]) => (
-            <div key={t} className="border-border p-5 md:[&:not(:last-child)]:border-r">
+            <div key={t} className="py-5">
               <h2 id={t === "Plans that fit the site" ? "values" : undefined} className="text-[21px]">{t}</h2>
               <p className="mt-2 text-[15px] text-muted-foreground">{d}</p>
             </div>

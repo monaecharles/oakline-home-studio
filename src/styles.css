@@ -85,19 +85,16 @@
     font-size: 16px;
     line-height: 1.6;
   }
-  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; line-height: 1.15; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: 0; line-height: 1.15; }
   :focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
 }
 
 @utility panel {
-  border: 1px solid var(--border);
-  background: var(--card);
-  padding: 16px;
-  @media (min-width: 768px) { padding: 24px; }
+  min-width: 0;
 }
 @utility eyebrow {
   font-size: 13px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--walnut);
   font-weight: 600;
@@ -127,6 +124,9 @@
 @utility btn-line {
   background: transparent; color: var(--primary);
   &:hover { background: var(--secondary); }
+}
+@utility hero-shade {
+  background: linear-gradient(90deg, var(--ink), transparent);
 }
 @utility field {
   width: 100%; min-height: 44px; border: 1px solid var(--input); background: var(--card);

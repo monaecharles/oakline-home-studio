@@ -27,7 +27,7 @@ const PHASES = [
   },
   {
     name: "Design Development",
-    what: "The chosen direction becomes floor plans, elevations and sections, then permit drawings. In parallel we build your finish schedule room by room using physical samples and the 3D model.",
+    what: "The chosen direction becomes floor plans, elevations and sections, then permit drawings. In parallel we build your finish schedule room by room using physical samples and your saved material inspiration.",
     deliver: "Permit set, finish schedule, lighting plan, a detailed construction budget and a build agreement.",
     decide: "Final plan, every finish and fixture, and approval of the construction budget.",
   },
@@ -57,16 +57,16 @@ function DesignBuild() {
           {PHASES.map((p) => (
             <li key={p.name} className="relative pb-6 pl-6 last:pb-0">
               <span className="absolute -left-[7px] top-2 h-3 w-3 border-2 border-primary bg-background" aria-hidden />
-              <div className="grid gap-4 border border-border bg-card p-4 md:p-6 lg:grid-cols-[1.2fr_1fr_1fr]">
+              <div className="grid gap-6 py-4 md:py-6 lg:grid-cols-[1.2fr_1fr_1fr]">
                 <div>
                   <h3 className="text-[24px]">{p.name}</h3>
                   <p className="mt-2">{p.what}</p>
                 </div>
-                <div className="border-t border-border pt-3 lg:border-l lg:border-t-0 lg:pl-4 lg:pt-0">
+                <div className="pt-3 lg:pt-0">
                   <h4 className="text-[14px] font-semibold uppercase tracking-wider text-walnut">You receive</h4>
                   <p className="mt-1 text-[15px]">{p.deliver}</p>
                 </div>
-                <div className="border-t border-border pt-3 lg:border-l lg:border-t-0 lg:pl-4 lg:pt-0">
+                <div className="pt-3 lg:pt-0">
                   <h4 className="text-[14px] font-semibold uppercase tracking-wider text-walnut">You decide</h4>
                   <p className="mt-1 text-[15px]">{p.decide}</p>
                 </div>
@@ -77,7 +77,7 @@ function DesignBuild() {
       </section>
       <section className="wrap section pt-0" aria-labelledby="types">
         <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-          <div className="grid border border-border">
+          <div className="grid">
             <h2 id="types" className="border-b border-border p-4 text-[28px] md:p-6">What we build</h2>
             {[
               ["Custom homes", "New homes on your lot or a lot you are buying, from compact single-level plans to larger family homes."],

@@ -84,39 +84,38 @@ export const FINISHES: Record<Category, { label: string; options: FinishOption[]
   floor: {
     label: "Flooring",
     options: [
-      { id: "oak", name: "Warm oak", color: "#C49A6C", note: "Light, honey-toned plank with visible straight grain." },
-      { id: "walnut", name: "Deep walnut", color: "#6B4A33", note: "Dark chocolate plank with wavy grain and more contrast." },
-      { id: "limestone", name: "Limestone", color: "#D9D2C3", note: "Pale honed stone tile with soft mottling." },
+      { id: "oak", name: "Light wood", color: "#C49A6C", note: "Light brown wood with visible grain; species not specified." },
+      { id: "walnut", name: "Rich brown wood", color: "#6B4A33", note: "Brown wood with pronounced knots and grain; species not specified." },
+      { id: "limestone", name: "Pale stone tile", color: "#D9D2C3", note: "Pale stone tiles with natural mottling and grout joints." },
     ],
   },
   wall: {
     label: "Wall color",
     options: [
-      { id: "ivory", name: "Ivory", color: "#EFE9DD", note: "Warm white that stays soft in morning light." },
-      { id: "greige", name: "Greige", color: "#CFC6B8", note: "Gray-beige that hides scuffs and reads calm at night." },
-      { id: "sage", name: "Sage", color: "#AEB7A0", note: "Muted green that pairs with oak and brass." },
+      { id: "ivory", name: "Light painted plaster", color: "#EFE9DD", note: "A pale painted surface with visible plaster texture." },
+      { id: "greige", name: "Warm gray plaster", color: "#CFC6B8", note: "A gray plaster surface with fine tonal variation." },
+      { id: "sage", name: "Muted green paint", color: "#AEB7A0", note: "A photographed green wall; paint brand and color not specified." },
     ],
   },
   cabinet: {
     label: "Cabinetry",
     options: [
-      { id: "oak", name: "Oak", color: "#B98B5E", note: "Rift-cut look with even, linear grain." },
-      { id: "walnut", name: "Walnut", color: "#5E4130", note: "Rich dark wood with figure in the grain." },
-      { id: "forest", name: "Forest painted", color: "#2F4A3C", note: "Deep green painted finish, satin sheen." },
+      { id: "oak", name: "Light wood", color: "#B98B5E", note: "Wood-grain inspiration for cabinetry; species not specified." },
+      { id: "walnut", name: "Rich brown wood", color: "#5E4130", note: "Knotted brown wood-grain inspiration; not a specified cabinet product." },
+      { id: "forest", name: "Muted green paint", color: "#2F4A3C", note: "Green painted-surface inspiration; not a specified cabinet finish." },
     ],
   },
   counter: {
     label: "Counters",
     options: [
-      { id: "quartz", name: "Ivory quartz", color: "#EEEAE2", note: "Bright, even surface with faint veining." },
-      { id: "charcoal", name: "Charcoal stone", color: "#3A3A38", note: "Dark honed stone with a matte, velvety feel." },
+      { id: "quartz", name: "Pale stone", color: "#EEEAE2", note: "A cropped stone sample showing natural variation; not a quartz product." },
+      { id: "charcoal", name: "Dark gray stone", color: "#3A3A38", note: "A dark stone sample with mottled detail; not a specified countertop product." },
     ],
   },
   fixture: {
     label: "Fixtures",
     options: [
-      { id: "brass", name: "Brushed brass", color: "#AD9270", note: "Warm metal that softens with use." },
-      { id: "black", name: "Matte black", color: "#1F1F1D", note: "Crisp graphic accent, shows water spots less." },
+      { id: "brass", name: "Brushed silver metal", color: "#AD9270", note: "A photographed silver-toned surface with fine brushed lines; alloy not specified." },
     ],
   },
 };
@@ -127,9 +126,9 @@ export type DesignState = Record<RoomId, RoomFinishes>;
 export const DEFAULT_DESIGN: DesignState = {
   living: { floor: "oak", wall: "ivory", fixture: "brass" },
   kitchen: { floor: "oak", wall: "ivory", cabinet: "oak", counter: "quartz", fixture: "brass" },
-  bedroom: { floor: "oak", wall: "greige", fixture: "black" },
+  bedroom: { floor: "oak", wall: "greige", fixture: "brass" },
   bath: { floor: "limestone", wall: "ivory", cabinet: "walnut", counter: "quartz", fixture: "brass" },
-  studio: { floor: "oak", wall: "sage", cabinet: "oak", fixture: "black" },
+  studio: { floor: "oak", wall: "sage", cabinet: "oak", fixture: "brass" },
 };
 
 export const STORAGE_KEY = "oakline:design:v1";
@@ -172,7 +171,7 @@ export function finishSchedule(d: DesignState) {
     studio: "Oakline Custom Homes",
     version: DESIGN_VERSION,
     createdAt: new Date().toISOString(),
-    note: "Finishes are visual approximations. Colors vary by display and lighting.",
+    note: "Representative material inspiration, not product specifications. Choices do not change the filmed home. Colors vary by display and lighting.",
     rooms: ROOMS.map((r) => ({
       id: r.id,
       name: r.name,

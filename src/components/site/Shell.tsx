@@ -3,11 +3,12 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Wordmark } from "./Logo";
 import { PHOTOS } from "@/lib/photos";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { MATERIAL_PHOTOS } from "@/lib/material-photos";
 
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/residences", label: "Residences" },
-  { to: "/explore-home", label: "Explore in 3D" },
+  { to: "/explore-home", label: "Home Walkthrough" },
   { to: "/materials", label: "Materials & Finishes" },
   { to: "/design-build", label: "Design & Build" },
   { to: "/studio", label: "Our Studio" },
@@ -24,7 +25,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             to={n.to}
             onClick={onNavigate}
             activeOptions={{ exact: true }}
-            className="block border-b border-border/60 py-2.5 text-[15px] text-foreground hover:text-primary data-[status=active]:font-semibold data-[status=active]:text-primary"
+            className="block py-2.5 text-[15px] text-foreground hover:text-primary data-[status=active]:font-semibold data-[status=active]:text-primary"
             activeProps={{ "aria-current": "page" }}
           >
             {n.label}
@@ -55,17 +56,17 @@ export function Shell({ children }: { children: ReactNode }) {
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:bg-card focus:p-2">
         Skip to content
       </a>
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[210px] flex-col border-r border-primary bg-background px-5 py-6 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[210px] flex-col bg-background px-5 py-6 lg:flex">
         <Link to="/" aria-label="Oakline Custom Homes, home">
           <Wordmark />
         </Link>
-        <p className="mt-4 border-t border-border pt-3 font-display text-[15px] italic leading-snug text-walnut">
+        <p className="mt-4 pt-3 font-display text-[15px] italic leading-snug text-walnut">
           Built around the way you live.
         </p>
         <nav aria-label="Primary" className="mt-6">
           <NavList />
         </nav>
-        <div className="mt-auto border-t border-border pt-3 text-[13px] leading-relaxed text-muted-foreground">
+        <div className="mt-auto pt-3 text-[13px] leading-relaxed text-muted-foreground">
           Atlanta, Marietta, Roswell
           <br />
           Visits by appointment
@@ -131,8 +132,8 @@ function Footer() {
           {socials.map(([k, v]) => (
             <a key={k} href={v} className="btn btn-line capitalize" rel="noopener">{k}</a>
           ))}
-          <button className="btn btn-line" onClick={open("privacy")}>Privacy</button>
-          <button className="btn btn-line" onClick={open("photos")}>Photography</button>
+          <button className="min-h-11 text-[14px] underline underline-offset-4" onClick={open("privacy")}>Privacy</button>
+          <button className="min-h-11 text-[14px] underline underline-offset-4" onClick={open("photos")}>Photography</button>
         </div>
       </div>
       <p className="wrap pb-6 text-[13px] text-muted-foreground">© {new Date().getFullYear()} Oakline Custom Homes</p>
@@ -149,7 +150,7 @@ function Footer() {
             <h2 className="text-2xl">Privacy</h2>
             <p className="mt-3">
               This site does not send your information anywhere. When you save a project brief or a finish selection, it is stored only in
-              this browser on this device. You can delete it from the Start Your Home page or the 3D viewer at any time.
+              this browser on this device. You can delete it from the Start Your Home page or the Materials & Finishes page at any time.
             </p>
           </>
         )}
@@ -159,9 +160,10 @@ function Footer() {
             <p className="mt-3">
               Interior and exterior photographs are from Unsplash and used under the{" "}
               <a className="underline" href="https://unsplash.com/license" rel="noopener">Unsplash License</a>. They show general architectural
-              inspiration, not Oakline projects. The 3D home and floor plan are original studio drawings.
+              inspiration, not Oakline projects. The walkthrough is the official Architectural Digest video of Alessandra Ambrosio’s home, embedded from YouTube. Material photographs are representative samples, not product specifications.
             </p>
             <ul className="mt-3 max-h-48 overflow-auto text-[14px]">
+              {Object.entries(MATERIAL_PHOTOS).map(([key, photo]) => <li key={key}><a href={photo.source} className="underline" target="_blank" rel="noopener noreferrer">{photo.alt} · {photo.license}</a></li>)}
               {Object.values(PHOTOS).map((p) => (
                 <li key={p.key}>
                   <a className="underline" href={`https://unsplash.com/photos/${p.id.replace("photo-", "")}`} rel="noopener">{p.alt}</a>

@@ -122,7 +122,7 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
     const r = roomById(sel);
     if (r) rig.current?.goTo(r.camera.position, r.camera.target);
     else rig.current?.goTo(HOME_VIEW.position, HOME_VIEW.target);
-  }, [sel, ready]);
+  }, [sel, ready, s.mode]);
 
   useEffect(() => {
     if (!full) return;

@@ -111,9 +111,9 @@ function Contact() {
       </PageIntro>
       <section className="wrap section">
         <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-          <div className="border border-primary bg-card p-4 md:p-6">
+          <div className="min-w-0">
             {!storageOk && (
-              <p role="status" className="mb-4 border border-border bg-secondary p-3 text-[15px]">
+              <p role="status" className="mb-4 bg-secondary p-3 text-[15px]">
                 This browser is blocking storage. Your brief will stay on this page only and disappear when you close it.
               </p>
             )}
@@ -182,7 +182,7 @@ function Contact() {
             {stage === "review" && (
               <div>
                 <h2 className="text-[26px]">Review your brief</h2>
-                <pre className="mt-3 whitespace-pre-wrap border border-border bg-background p-4 font-sans text-[15px]">{inquirySummary(getValues())}</pre>
+                <pre className="mt-3 whitespace-pre-wrap py-4 font-sans text-[15px]">{inquirySummary(getValues())}</pre>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <button className="btn btn-solid" onClick={save}>Save project brief</button>
                   <button className="btn btn-line" onClick={() => setStage("form")}>Edit</button>
@@ -192,10 +192,10 @@ function Contact() {
             {stage === "saved" && saved && (
               <div>
                 <h2 className="text-[26px]">Brief saved</h2>
-                <p role="status" className="mt-2 border border-primary bg-secondary p-3 font-semibold">
+                <p role="status" className="mt-2 bg-secondary p-3 font-semibold">
                   {storageOk ? "Saved on this device. Nothing has been sent." : "Kept on this page only. Nothing has been sent. It will disappear when you close the page."}
                 </p>
-                <pre className="mt-3 whitespace-pre-wrap border border-border bg-background p-4 font-sans text-[15px]">{inquirySummary(saved)}</pre>
+                <pre className="mt-3 whitespace-pre-wrap py-4 font-sans text-[15px]">{inquirySummary(saved)}</pre>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <button className="btn btn-line" onClick={() => setStage("form")}>Edit</button>
                   <button

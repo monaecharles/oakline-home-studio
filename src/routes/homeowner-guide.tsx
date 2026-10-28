@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Figure, PageIntro } from "@/components/site/Figure";
-import { LazyCompare } from "@/components/three/LazyViewer";
+
 import { download } from "@/lib/download";
 import { pageHead } from "@/lib/site-config";
 
@@ -34,7 +34,7 @@ const FAQ: { group: string; items: [string, string][] }[] = [
     group: "Design decisions",
     items: [
       ["How many decisions will we need to make?", "Usually several hundred, from plan layout down to cabinet pulls. We group them by phase and room so you are never deciding everything at once, and we bring a short list of options to each meeting."],
-      ["Can we use the 3D model to choose finishes?", "Yes, as a starting point. The model shows how floor, wall, cabinet and counter choices work together. Final selections are always confirmed with physical samples, because screens shift color."],
+      ["Can we save material inspiration?", "Yes. Save photographic material choices by room on the Materials & Finishes page. This board is separate from the filmed walkthrough and does not change the home in the video. Final selections are confirmed with physical samples."],
     ],
   },
   {
@@ -111,8 +111,8 @@ function Guide() {
         <div className="mt-4 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
           <div className="space-y-5">
             {FAQ.map((g) => (
-              <div key={g.group} className="border border-border bg-card">
-                <h3 className="border-b border-border px-4 py-3 text-[22px] md:px-6">{g.group}</h3>
+              <div key={g.group} className="">
+                <h3 className="py-3 text-[22px]">{g.group}</h3>
                 {g.items.map(([q, a]) => (
                   <details key={q} className="group border-b border-border/70 last:border-b-0">
                     <summary className="flex min-h-[48px] cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-semibold md:px-6">
@@ -155,17 +155,9 @@ function Guide() {
         </div>
       </section>
       <section className="wrap section pt-0" aria-labelledby="compare">
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.6fr] lg:items-start">
-          <div className="panel">
-            <h2 id="compare" className="text-[26px]">Warm oak or deep walnut?</h2>
-            <p className="mt-2">
-              Both images are rendered from the same camera in our 3D study home, with only the floor and kitchen cabinetry changed. Drag the divider to compare. Oak keeps the room bright and lets furniture stand out; walnut makes the room feel more enclosed and puts the wood itself on display.
-            </p>
-            <p className="mt-2 text-[13px] text-muted-foreground">Colors vary by display and lighting.</p>
-            <Link to="/explore-home" search={{ room: "kitchen" }} className="mt-3 inline-block font-semibold text-primary underline underline-offset-4">Try it yourself in the kitchen</Link>
-          </div>
-          <LazyCompare />
-        </div>
+        <h2 id="compare" className="text-[26px]">Choosing a material palette</h2>
+        <p className="mt-3 measure">Look at wood grain, stone variation and metal detail together, then confirm the actual products with physical samples in daylight and evening light. Photographs are inspiration, not product specifications.</p>
+        <Link to="/materials" className="mt-4 inline-block font-semibold text-primary underline underline-offset-4">Build your material inspiration board</Link>
       </section>
     </>
   );

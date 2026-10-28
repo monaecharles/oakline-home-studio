@@ -168,9 +168,9 @@ function Residences() {
                   <Figure k={s.photos[2]!.k} caption={s.photos[2]!.caption} ratio="4/3" sizes="(min-width:1024px) 25vw, 50vw" />
                 </div>
               </div>
-              <dl className="mt-6 grid border border-border md:grid-cols-3">
+              <dl className="mt-6 grid gap-6 md:grid-cols-3">
                 {s.rooms.map((r) => (
-                  <div key={r.id} id={r.id} className="scroll-mt-20 border-border p-4 md:[&:not(:last-child)]:border-r [&:not(:last-child)]:border-b md:[&:not(:last-child)]:border-b-0">
+                  <div key={r.id} id={r.id} className="scroll-mt-20 py-4">
                     <dt className="font-display text-[19px]">{r.name}</dt>
                     <dd className="mt-1 text-[15px] text-muted-foreground">{r.note}</dd>
                   </div>
@@ -180,8 +180,8 @@ function Residences() {
           ))}
         </AnimatePresence>
         <div className="panel mt-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <p className="measure">Want to see how finishes change a room? The 3D study home lets you swap floors, walls and cabinetry room by room.</p>
-          <Link to="/explore-home" className="btn btn-solid">Explore the home in 3D</Link>
+          <p className="measure">See a real-home walkthrough, then collect material photographs for your own project.</p>
+          <Link to="/explore-home" className="btn btn-solid">Watch a real home walkthrough</Link>
         </div>
       </div>
     </>

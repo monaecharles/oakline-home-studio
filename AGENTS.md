@@ -11,6 +11,8 @@
 
 ## Oakline site
 - Room IDs/coordinates live only in src/lib/rooms.ts; 3D scene, SVG plan and swatches all read from it so they stay in sync.
-- Viewer/finish state is a tiny external store (src/lib/design-store.ts) so pages like Materials can apply finishes before the viewer mounts.
-- The 3D viewer is lazy-loaded behind ClientOnly (LazyViewer) to keep three.js out of SSR and first paint.
+- Material inspiration choices use the existing external design store and browser storage to preserve room selections without connecting them to footage.
+- Public home exploration uses the shared official YouTube walkthrough component with a persistent original-video link; legacy 3D modules are not mounted by content routes.
 - The site is local-only: no network submission unless SITE_CONFIG endpoints are explicitly configured.
+
+- Material photo sources are centralized in src/lib/material-photos.ts and imported through asset pointers so labels and attribution share one registry.

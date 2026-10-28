@@ -17,10 +17,11 @@ export function Figure({
   priority?: boolean;
   sizes?: string;
 }) {
-  const p = PHOTOS[k]!;
+  const p = PHOTOS[k];
   const [failed, setFailed] = useState(false);
+  if (!p) return null;
   return (
-    <figure className={cn("border border-border bg-card p-2", className)}>
+    <figure className={cn("min-w-0", className)}>
       <div className="relative overflow-hidden bg-secondary" style={{ aspectRatio: ratio }}>
         {failed ? (
           <div className="absolute inset-0 flex items-center justify-center p-4 text-center text-[14px] text-muted-foreground">
@@ -40,7 +41,7 @@ export function Figure({
           />
         )}
       </div>
-      {caption && <figcaption className="border-t border-border/60 px-1 pt-2 text-[14px] text-muted-foreground">{caption}</figcaption>}
+      {caption && <figcaption className="pt-2 text-[14px] text-muted-foreground">{caption}</figcaption>}
     </figure>
   );
 }
@@ -48,7 +49,7 @@ export function Figure({
 export function PageIntro({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
   return (
     <header className="wrap section pb-0">
-      <div className="panel max-w-3xl">
+      <div className="max-w-3xl">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="mt-2 text-[34px] md:text-[46px]">{title}</h1>
         <div className="measure mt-3 text-[17px] text-muted-foreground">{children}</div>

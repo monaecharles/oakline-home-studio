@@ -32,11 +32,11 @@ export function useRoomMaterials(design: DesignState) {
   useEffect(() => {
     for (const r of ROOMS) {
       (Object.keys(FINISHES) as Category[]).forEach((c) => {
-        const id = design[r.id][c] ?? FINISHES[c].options[0].id;
+        const id = design[r.id][c] ?? FINISHES[c].options[0]!.id;
         const mat = mats[r.id][c];
         const rep: [number, number] = c === "floor" ? [2, 2] : [1, 1];
         mat.map = makeTexture(TEX_FOR[c](id), finishColor(c, id), rep);
-        mat.userData.finish = id;
+        mat.userData["finish"] = id;
         mat.metalness = c === "fixture" ? (id === "brass" ? 0.85 : 0.2) : 0;
         mat.roughness = c === "fixture" ? (id === "brass" ? 0.35 : 0.55) : c === "counter" ? 0.35 : c === "floor" ? 0.6 : 0.85;
         mat.needsUpdate = true;
@@ -496,7 +496,7 @@ export function House({ design, selected, hovered, roof, cutaway, evening, hidde
 /** Walls whose 2D segment crosses the camera→target line get cut away in room mode. */
 export function occludingWalls(cam: [number, number, number], target: [number, number, number]) {
   const set = new Set<string>();
-  const inter = (p1: number[], p2: number[], p3: number[], p4: number[]) => {
+  const inter = (p1: [number, number], p2: [number, number], p3: [number, number], p4: [number, number]) => {
     const d = (p2[0] - p1[0]) * (p4[1] - p3[1]) - (p2[1] - p1[1]) * (p4[0] - p3[0]);
     if (Math.abs(d) < 1e-9) return false;
     const u = ((p3[0] - p1[0]) * (p4[1] - p3[1]) - (p3[1] - p1[1]) * (p4[0] - p3[0])) / d;

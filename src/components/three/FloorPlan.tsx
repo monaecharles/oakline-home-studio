@@ -68,7 +68,7 @@ export function FloorPlan({ selected, onSelect }: { selected: RoomId | null; onS
                 {/* front door on east */}
                 <line x1={X(4)} y1={Z(0.05)} x2={X(4)} y2={Z(0.95)} stroke="var(--card)" strokeWidth="6" pointerEvents="none" />
                 {/* windows */}
-                {[[-3.5, -3, -0.5, -3], [1, -3, 2.6, -3], [-3.2, 4, -1.6, 4], [2.5, 4, 3.5, 4]].map(([a, b, c, d], i) => (
+                {([[-3.5, -3, -0.5, -3], [1, -3, 2.6, -3], [-3.2, 4, -1.6, 4], [2.5, 4, 3.5, 4]] as [number, number, number, number][]).map(([a, b, c, d], i) => (
                   <line key={i} x1={X(a)} y1={Z(b)} x2={X(c)} y2={Z(d)} stroke="var(--brass)" strokeWidth="3" pointerEvents="none" />
                 ))}
                 <text x={X(-4) - 4} y={Z(-1.6)} fontSize="11" fill="var(--walnut)" textAnchor="end" transform={`rotate(-90 ${X(-4) - 8} ${Z(-1.6)})`}>Patio</text>

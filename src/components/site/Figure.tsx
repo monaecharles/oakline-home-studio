@@ -17,7 +17,7 @@ export function Figure({
   priority?: boolean;
   sizes?: string;
 }) {
-  const p = PHOTOS[k];
+  const p = PHOTOS[k]!;
   const [failed, setFailed] = useState(false);
   return (
     <figure className={cn("border border-border bg-card p-2", className)}>

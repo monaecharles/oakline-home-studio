@@ -69,7 +69,7 @@ export default function CompareCapture() {
                 <color attach="background" args={["#dfe3dc"]} />
                 <hemisphereLight args={["#fff6e8", "#b9b09a", 1.2]} />
                 <directionalLight position={[7, 12, 6]} intensity={2} />
-                <House design={VARIANTS[variant].design} selected="kitchen" hovered={null} roof={false} cutaway={false} evening={false} hiddenWalls={new Set()} />
+                <House design={VARIANTS[variant]!.design} selected="kitchen" hovered={null} roof={false} cutaway={false} evening={false} hiddenWalls={new Set()} />
                 <Grab variant={variant} onShot={onShot} />
               </Canvas>
             </div>

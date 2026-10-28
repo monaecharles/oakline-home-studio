@@ -10,11 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesignBuildRouteImport } from './routes/design-build'
 import { Route as ExploreHomeRouteImport } from './routes/explore-home'
+import { Route as MaterialsRouteImport } from './routes/materials'
+import { Route as ResidencesRouteImport } from './routes/residences'
+import { Route as StudioRouteImport } from './routes/studio'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignBuildRoute = DesignBuildRouteImport.update({
+  id: '/design-build',
+  path: '/design-build',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExploreHomeRoute = ExploreHomeRouteImport.update({
@@ -22,31 +31,81 @@ const ExploreHomeRoute = ExploreHomeRouteImport.update({
   path: '/explore-home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MaterialsRoute = MaterialsRouteImport.update({
+  id: '/materials',
+  path: '/materials',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResidencesRoute = ResidencesRouteImport.update({
+  id: '/residences',
+  path: '/residences',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/design-build': typeof DesignBuildRoute
   '/explore-home': typeof ExploreHomeRoute
+  '/materials': typeof MaterialsRoute
+  '/residences': typeof ResidencesRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/design-build': typeof DesignBuildRoute
   '/explore-home': typeof ExploreHomeRoute
+  '/materials': typeof MaterialsRoute
+  '/residences': typeof ResidencesRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/design-build': typeof DesignBuildRoute
   '/explore-home': typeof ExploreHomeRoute
+  '/materials': typeof MaterialsRoute
+  '/residences': typeof ResidencesRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore-home'
+  fullPaths:
+    | '/'
+    | '/design-build'
+    | '/explore-home'
+    | '/materials'
+    | '/residences'
+    | '/studio'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore-home'
-  id: '__root__' | '/' | '/explore-home'
+  to:
+    | '/'
+    | '/design-build'
+    | '/explore-home'
+    | '/materials'
+    | '/residences'
+    | '/studio'
+  id:
+    | '__root__'
+    | '/'
+    | '/design-build'
+    | '/explore-home'
+    | '/materials'
+    | '/residences'
+    | '/studio'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DesignBuildRoute: typeof DesignBuildRoute
   ExploreHomeRoute: typeof ExploreHomeRoute
+  MaterialsRoute: typeof MaterialsRoute
+  ResidencesRoute: typeof ResidencesRoute
+  StudioRoute: typeof StudioRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/design-build': {
+      id: '/design-build'
+      path: '/design-build'
+      fullPath: '/design-build'
+      preLoaderRoute: typeof DesignBuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/explore-home': {
       id: '/explore-home'
       path: '/explore-home'
@@ -65,12 +131,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreHomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/materials': {
+      id: '/materials'
+      path: '/materials'
+      fullPath: '/materials'
+      preLoaderRoute: typeof MaterialsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/residences': {
+      id: '/residences'
+      path: '/residences'
+      fullPath: '/residences'
+      preLoaderRoute: typeof ResidencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DesignBuildRoute: DesignBuildRoute,
   ExploreHomeRoute: ExploreHomeRoute,
+  MaterialsRoute: MaterialsRoute,
+  ResidencesRoute: ResidencesRoute,
+  StudioRoute: StudioRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

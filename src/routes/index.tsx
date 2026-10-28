@@ -50,7 +50,7 @@ function Home() {
       <section className="wrap section" aria-labelledby="spreads">
         <h2 id="spreads" className="sr-only">Residence design studies</h2>
         <div className="grid gap-0 border border-border lg:grid-cols-[1.4fr_1fr]">
-          <Figure k="oakline-02" className="border-0 lg:border-r" caption="Contemporary two-story massing at dusk, the kind of street presence we start from for The Alder House." />
+          <Figure k="oakline-02" className="border-0 lg:border-r" caption="Crisp two-story massing with a roof terrace: one reference for the Alder House's simple volumes." />
           <div className="flex flex-col justify-center p-5 md:p-7">
             <p className="eyebrow">Design study</p>
             <h3 className="mt-2 text-[28px]">The Alder House</h3>
@@ -69,7 +69,7 @@ function Home() {
             </p>
             <Link to="/residences" hash="courtyard" className="mt-4 self-start text-[15px] font-semibold text-primary underline underline-offset-4">Read the Courtyard study</Link>
           </div>
-          <Figure k="oakline-09" ratio="16/9" className="order-1 border-0 lg:order-2" caption="Living and dining under one ceiling, with open shelving and daylight from two sides." />
+          <Figure k="oakline-09" ratio="16/9" className="order-1 border-0 lg:order-2" caption="Living room with a timber wall and the kitchen beyond, one open sightline." />
         </div>
       </section>
 
@@ -85,7 +85,7 @@ function Home() {
           <LazyViewer compact />
         ) : (
           <button onClick={() => setShow3d(true)} className="group relative block w-full border border-primary bg-card p-2 text-left">
-            <img src={`https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=1400&q=70`} alt="Living room detail with a sofa and layered neutral textiles" loading="lazy" className="aspect-[21/9] w-full object-cover opacity-80" />
+            <img src={`https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=1400&q=70`} alt="Living room with exposed wood beams, arched windows and a fireplace" loading="lazy" className="aspect-[21/9] w-full object-cover opacity-80" />
             <span className="absolute inset-x-6 bottom-6 border border-primary bg-card p-4 md:right-auto md:max-w-sm">
               <span className="block font-display text-[22px]">Load the 3D home</span>
               <span className="mt-1 block text-[15px] text-muted-foreground">The interactive model loads only when you ask for it, so this page stays quick.</span>
@@ -125,7 +125,7 @@ function Home() {
             <Link to="/design-build" className="mt-4 inline-block font-semibold text-primary underline underline-offset-4">See how a project runs</Link>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Figure k="oakline-07" ratio="3/4" caption="Cabinet and counter detail." />
+            <Figure k="oakline-07" ratio="3/4" caption="White cabinetry over a walnut island base." />
             <Figure k="oakline-10" ratio="3/4" caption="A house set among mature trees." />
           </div>
         </div>

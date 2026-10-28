@@ -45,9 +45,9 @@ const STUDIES: {
       { id: "alder-primary", name: "Primary suite", note: "Over the garage, with a dressing room between bed and bath." },
     ],
     photos: [
-      { k: "oakline-02", caption: "Two-story massing with a lit interior at dusk." },
-      { k: "oakline-04", caption: "Open kitchen and living space with light wood floors." },
-      { k: "oakline-07", caption: "Cabinetry and counter detail." },
+      { k: "oakline-02", caption: "Simple stacked volumes and a roof terrace." },
+      { k: "oakline-04", caption: "An open living room with a floating oak stair." },
+      { k: "oakline-07", caption: "Quartz island over a walnut base, the kind of mix planned for the kitchen." },
     ],
   },
   {
@@ -67,9 +67,9 @@ const STUDIES: {
       { id: "courtyard-garden", name: "Courtyard", note: "Planted beds, a shade tree and a gravel terrace." },
     ],
     photos: [
-      { k: "oakline-03", caption: "Tall glazing and a wood ceiling in an open living space." },
-      { k: "oakline-09", caption: "Living and dining under one ceiling." },
-      { k: "oakline-05", caption: "Clean rooflines and large windows on a contemporary exterior." },
+      { k: "oakline-03", caption: "Dining area open to the stair through glass partitions." },
+      { k: "oakline-09", caption: "Living room with a timber wall facing the garden glass." },
+      { k: "oakline-05", caption: "Timber and black cladding with a glazed entry." },
     ],
   },
   {
@@ -89,9 +89,9 @@ const STUDIES: {
       { id: "ridge-studio", name: "Studio", note: "Desk, guest daybed and a window seat." },
     ],
     photos: [
-      { k: "oakline-10", caption: "A modern house set among mature trees." },
-      { k: "oakline-12", caption: "Layered textiles and a quiet seating corner." },
-      { k: "oakline-08", caption: "Wood console, ceramics and books." },
+      { k: "oakline-10", caption: "A house in dark and timber cladding kept clear of a large tree." },
+      { k: "oakline-12", caption: "Wood beams and arched windows for a warmer living room." },
+      { k: "oakline-08", caption: "Sage wall and rattan console, a palette suited to the woods." },
     ],
   },
 ];

@@ -20,31 +20,31 @@ const CARE: Record<Category, { intro: string; care: string; photo: string; capti
     intro: "Floors cover the most area in a house, so their tone sets the whole palette. Oak reads light and even; walnut is darker with more movement; limestone-look tile is cool underfoot and suits baths and entries.",
     care: "Wood floors take wear best with a matte finish that hides fine scratches and can be screened and recoated in place. Expect wood to shift slightly in color with sunlight over the first year. Stone and tile need sealed grout lines in wet rooms.",
     photo: "oakline-04",
-    caption: "Light oak flooring through an open kitchen and living area.",
+    caption: "Light oak floors and stair treads in an open living room.",
   },
   wall: {
     intro: "Wall color changes more with light than any other finish. Ivory stays warm in north light, greige settles down in the evening, and sage pairs well with oak and brass.",
     care: "We generally recommend a washable eggshell in halls and kitchens and a flat or matte finish in bedrooms. Darker colors show touch-up patches more, so keep a labeled can for each room.",
     photo: "oakline-12",
-    caption: "Soft neutral walls with layered textiles.",
+    caption: "Warm white walls with dark wood beams overhead.",
   },
   cabinet: {
     intro: "Cabinetry is the largest piece of furniture you will buy. Oak gives an even linear grain, walnut is richer and darker, and a painted forest green makes the kitchen the focal point of an open plan.",
     care: "Wood cabinet faces are wiped with a damp cloth and dried; avoid abrasive pads. Painted doors can chip at edges over years of use, and those chips can be touched up. Wood darkens or warms gradually with light.",
     photo: "oakline-07",
-    caption: "Cabinetry fronts with integrated hardware.",
+    caption: "Painted shaker cabinets beside a walnut island.",
   },
   counter: {
     intro: "Ivory quartz brightens a kitchen and shows little pattern. Charcoal stone has a soft matte surface that feels quieter and hides crumbs, but shows water rings and fingerprints more readily.",
     care: "Engineered quartz is non-porous but should not take hot pans directly. Natural stone usually needs periodic sealing; honed finishes develop a patina rather than staying uniform.",
     photo: "oakline-06",
-    caption: "Long kitchen counter with wood cabinetry below.",
+    caption: "Pale quartz counters on white cabinets and a walnut base.",
   },
   fixture: {
     intro: "Hardware and fixtures are small but they are touched every day. Brushed brass is warm and softens with use; matte black is graphic and reads clearly against light walls.",
     care: "Unlacquered brass develops a living patina; lacquered brass stays brighter. Matte black hides water spots better than polished finishes but can show wear on edges after many years of heavy use.",
     photo: "oakline-11",
-    caption: "Vanity with a round mirror and warm metal accents.",
+    caption: "Wall-mounted fixtures over a vessel sink.",
   },
 };
 

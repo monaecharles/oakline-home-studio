@@ -228,7 +228,7 @@ function Contact() {
                 <div><dt className="font-semibold">Hours</dt><dd>Monday–Friday, 9 a.m.–5 p.m. Eastern. Studio conversations by appointment.</dd></div>
               </dl>
             </div>
-            <Figure k="oakline-08" caption="Samples and objects on the studio console." ratio="4/3" />
+            <Figure k="oakline-08" caption="Sage walls, oak and rattan: a palette from our library." ratio="4/3" />
           </aside>
         </div>
       </section>

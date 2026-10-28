@@ -150,7 +150,7 @@ function Guide() {
               </ul>
               <button className="btn btn-line no-print mt-3" onClick={() => window.print()}>Print checklist</button>
             </div>
-            <Figure k="oakline-04" caption="An open kitchen and living area of the kind many first conversations begin with." ratio="4/3" />
+            <Figure k="oakline-04" caption="An open living room and stair, the kind of space many first conversations begin with." ratio="4/3" />
           </aside>
         </div>
       </section>

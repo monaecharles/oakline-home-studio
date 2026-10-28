@@ -17,7 +17,7 @@ const TEAM = [
     name: "Julian Mercer",
     role: "Founder and design director",
     photo: "oakline-03",
-    caption: "Tall glazing and a wood ceiling: the kind of proportion Julian sketches toward.",
+    caption: "Glass partitions and an open stair keep a dining room connected to the house.",
     bio: "Julian starts every project with a tape measure and a notebook, not a portfolio. He asks where the morning light lands, where groceries get set down and which room gets used for homework. His plans favor fewer, better-proportioned rooms over more square footage. He leads concept design on every Oakline home and stays involved through the final walkthrough, because he believes a drawing is only as good as the room it becomes.",
   },
   {
@@ -31,7 +31,7 @@ const TEAM = [
     name: "Evan Cole",
     role: "Materials coordinator",
     photo: "oakline-08",
-    caption: "Wood, ceramic and paper: the samples Evan lays out on the studio table.",
+    caption: "Sage paint, rattan and oak working together in one room.",
     bio: "Evan runs the material library and the finish schedule. He pulls physical samples for each room, lays them out under daylight and warm evening light, and records every choice so the site crew builds exactly what was selected. He tracks lead times early so a backordered tile does not hold up a kitchen. He also keeps the 3D model's finishes in step with the samples clients approve.",
   },
 ];

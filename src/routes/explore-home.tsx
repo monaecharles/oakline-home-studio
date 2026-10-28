@@ -48,8 +48,8 @@ function Explore() {
               Finishes are rendered approximations. We confirm every selection with physical samples in the studio before anything is ordered.
             </p>
           </div>
-          <Figure k="oakline-01" caption="Inspiration photograph of a living room with similar proportions." />
-          <Figure k="oakline-11" caption="Inspiration photograph for the bath: stone vanity and round mirror." />
+          <Figure k="oakline-01" caption="Inspiration photograph: a bright living room with tall windows." />
+          <Figure k="oakline-11" caption="Inspiration photograph for the bath: freestanding tub and vessel sink." />
         </div>
       </section>
     </>

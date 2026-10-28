@@ -10,8 +10,8 @@ const VARIANTS: { label: string; design: DesignState }[] = [
   { label: "Warm oak", design: { ...DEFAULT_DESIGN, living: { ...DEFAULT_DESIGN.living, floor: "oak" }, kitchen: { ...DEFAULT_DESIGN.kitchen, floor: "oak", cabinet: "oak" } } },
   { label: "Deep walnut", design: { ...DEFAULT_DESIGN, living: { ...DEFAULT_DESIGN.living, floor: "walnut" }, kitchen: { ...DEFAULT_DESIGN.kitchen, floor: "walnut", cabinet: "walnut" } } },
 ];
-const CAM: [number, number, number] = [-1.2, 1.7, 0.8];
-const TARGET = new THREE.Vector3(2.6, 0.7, -2.4);
+const CAM: [number, number, number] = [0.2, 1.8, 0.85];
+const TARGET = new THREE.Vector3(3, 0.6, -2.6);
 
 function Grab({ variant, onShot }: { variant: number; onShot: (i: number, url: string) => void }) {
   const { gl, scene, camera } = useThree();

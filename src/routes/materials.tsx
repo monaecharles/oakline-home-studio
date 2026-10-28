@@ -1,7 +1,11 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Figure, PageIntro } from "@/components/site/Figure";
-import { designStore } from "@/lib/design-store";
+import { MaterialPhoto } from "@/components/site/MaterialPhoto";
+import { Button } from "@/components/ui/button";
+import { Check, Bookmark, Trash2 } from "lucide-react";
+import { designStore, useDesign } from "@/lib/design-store";
+import { materialPhoto } from "@/lib/material-photos";
 import { FINISHES, ROOMS, type Category } from "@/lib/rooms";
 import { pageHead } from "@/lib/site-config";
 
@@ -48,32 +52,39 @@ const CARE: Record<Category, { intro: string; care: string; photo: string; capti
   },
 };
 
-function Grain({ color, cat, id }: { color: string; cat: Category; id: string }) {
-  const wood = (cat === "floor" && id !== "limestone") || (cat === "cabinet" && id !== "forest");
-  const bg = wood
-    ? `repeating-linear-gradient(0deg, ${color} 0 7px, color-mix(in oklab, ${color} 86%, black) 7px 8px, ${color} 8px 15px, color-mix(in oklab, ${color} 92%, white) 15px 17px)`
-    : cat === "fixture"
-      ? `linear-gradient(135deg, color-mix(in oklab, ${color} 80%, white), ${color} 45%, color-mix(in oklab, ${color} 75%, black))`
-      : `radial-gradient(circle at 30% 30%, color-mix(in oklab, ${color} 92%, white), ${color} 60%)`;
-  return <span className="block aspect-[4/3] border border-ink/25" style={{ background: bg }} aria-hidden />;
-}
-
 function Materials() {
-  const navigate = useNavigate();
+  const state = useDesign();
+  const [selectedRoom, setSelectedRoom] = useState<(typeof ROOMS)[number]["id"]>("kitchen");
+  const [notice, setNotice] = useState("");
   useEffect(() => designStore.hydrate(), []);
   const apply = (cat: Category, value: string, roomId: string) => {
     const room = ROOMS.find((r) => r.id === roomId);
     if (!room) return;
     designStore.setFinish(room.id, cat, value);
-    designStore.select(room.id);
-    designStore.set({ mode: "3d" });
-    navigate({ to: "/explore-home", search: { room: room.id } });
+    setNotice(`${FINISHES[cat].options.find((o) => o.id === value)?.name} saved for ${room.name}.`);
   };
   return (
     <>
       <PageIntro eyebrow="Material library" title="Materials & Finishes">
-        The palette we start most homes from. Every finish below can be tried in the 3D home. Choose a room next to a finish and the viewer opens with it applied.
+        Photographic references for your own home. These are representative material samples, not specified products. Your saved inspiration board is separate from the walkthrough and does not change the house in the video.
       </PageIntro>
+      <section className="wrap mt-8" aria-labelledby="board-title">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h2 id="board-title" className="text-[28px]">Your inspiration board</h2>
+          <Button variant="ghost" onClick={() => { designStore.resetHome(); setNotice("Saved choices cleared."); }}><Trash2 />Clear choices</Button>
+        </div>
+        <label htmlFor="board-room" className="mt-4 block text-[14px] font-semibold">Room</label>
+        <select id="board-room" className="field mt-1 max-w-xs" value={selectedRoom} onChange={(e) => { const room = ROOMS.find((r) => r.id === e.target.value); if (room) setSelectedRoom(room.id); }}>
+          {ROOMS.map((room) => <option key={room.id} value={room.id}>{room.name}</option>)}
+        </select>
+        <ul className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {ROOMS.find((room) => room.id === selectedRoom)?.categories.map((cat) => {
+            const option = FINISHES[cat].options.find((o) => o.id === state.design[selectedRoom][cat]);
+            return option ? <li key={cat}><MaterialPhoto category={cat} id={option.id} /><p className="mt-2 text-[13px] text-muted-foreground">{FINISHES[cat].label}</p><p className="text-[14px] font-semibold">{option.name}</p></li> : null;
+          })}
+        </ul>
+        <p role="status" className="mt-3 text-[14px] text-muted-foreground">{!state.storageOk ? "This browser blocks storage; choices stay on this page only." : notice || "Choices are saved in this browser on this device."}</p>
+      </section>
       <div className="wrap section">
         {(Object.keys(FINISHES) as Category[]).map((cat) => {
           const rooms = ROOMS.filter((r) => r.categories.includes(cat));
@@ -91,24 +102,25 @@ function Materials() {
                 </div>
                 <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                   {FINISHES[cat].options.map((o) => (
-                    <li key={o.id} className="flex flex-col border border-border bg-card p-3">
-                      <Grain color={o.color} cat={cat} id={o.id} />
+                    <li key={o.id} className="flex min-w-0 flex-col">
+                      <MaterialPhoto category={cat} id={o.id} />
                       <h3 className="mt-3 font-display text-[20px]">{o.name}</h3>
                       <p className="mt-1 flex-1 text-[15px] text-muted-foreground">{o.note}</p>
-                      <label className="mt-3 text-[14px] font-semibold" htmlFor={`apply-${cat}-${o.id}`}>Apply in room</label>
+                      <a className="mt-2 text-[12px] text-muted-foreground underline underline-offset-4" href={materialPhoto(cat, o.id).source} target="_blank" rel="noopener noreferrer">Representative material sample · Photo source</a>
+                      <label className="mt-3 text-[14px] font-semibold" htmlFor={`apply-${cat}-${o.id}`}>Save for room</label>
                       <div className="mt-1 flex gap-2">
                         <select id={`apply-${cat}-${o.id}`} className="field min-w-0 flex-1 text-[15px]" defaultValue={rooms[0]?.id}>
                           {rooms.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
                         </select>
-                        <button
-                          className="btn btn-solid px-3"
+                        <Button
+                          className="min-h-11 px-3"
                           onClick={() => {
-                            const sel = document.getElementById(`apply-${cat}-${o.id}`) as HTMLSelectElement;
-                            apply(cat, o.id, sel.value);
+                            const sel = document.getElementById(`apply-${cat}-${o.id}`);
+                            if (sel instanceof HTMLSelectElement) apply(cat, o.id, sel.value);
                           }}
                         >
-                          Apply
-                        </button>
+                          <Bookmark />Save
+                        </Button>
                       </div>
                     </li>
                   ))}

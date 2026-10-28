@@ -115,7 +115,7 @@ export const FINISHES: Record<Category, { label: string; options: FinishOption[]
   fixture: {
     label: "Fixtures",
     options: [
-      { id: "brass", name: "Brushed silver metal", color: "#AD9270", note: "A photographed silver-toned surface with fine brushed lines; alloy not specified." },
+      { id: "brass", name: "Brushed silver metal", color: "#BCC2C3", note: "A photographed silver-toned surface with fine brushed lines; alloy not specified." },
     ],
   },
 };

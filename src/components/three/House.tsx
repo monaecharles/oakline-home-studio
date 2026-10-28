@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { Html } from "@react-three/drei";
+
 import type { ThreeEvent } from "@react-three/fiber";
 import { FINISHES, ROOMS, finishColor, type Category, type DesignState, type RoomId } from "@/lib/rooms";
 import { makeTexture, type TexKind } from "./textures";
@@ -53,10 +53,10 @@ function useStatic() {
       new THREE.MeshStandardMaterial({ color: kind ? "#ffffff" : color, map: kind ? makeTexture(kind, color) : null, roughness: rough, ...extra });
     return {
       core: std("#E7E1D6", undefined, 0.9),
-      exterior: std("#D8D1C4", "stone", 0.9),
+      exterior: std("#F0EAE0", "paint", 0.9),
       trim: std("#252522", undefined, 0.5),
       glass: new THREE.MeshPhysicalMaterial({ color: "#cfe0e6", transparent: true, opacity: 0.28, roughness: 0.05, metalness: 0, depthWrite: false }),
-      roof: std("#3b3a36", undefined, 0.85),
+      roof: std("#A65D43", "stone", 0.85),
       fascia: std("#76543B", "wood", 0.7),
       forest: std("#2F4A3C", "fabric", 0.95),
       linen: std("#E9E3D6", "fabric", 0.95),
@@ -220,7 +220,7 @@ function Pendant({ p, st, fix }: { p: [number, number, number]; st: Static; fix:
   return (
     <group position={p}>
       <mesh position={[0, (WALL_H - p[1]) / 2, 0]} material={fix}><cylinderGeometry args={[0.006, 0.006, WALL_H - p[1]]} /></mesh>
-      <mesh material={fix}><sphereGeometry args={[0.18, 20, 10, 0, Math.PI * 2, 0, Math.PI / 2]} /></mesh>
+      <mesh material={fix}><sphereGeometry args={[0.22, 12, 12]} /></mesh>
       <mesh position={[0, -0.01, 0]} rotation-x={Math.PI / 2} material={st.lamp}><circleGeometry args={[0.16, 20]} /></mesh>
     </group>
   );
@@ -457,17 +457,7 @@ export function House({ design, selected, hovered, roof, cutaway, evening, hidde
               <planeGeometry args={[w, d]} />
             </mesh>
             {evening && <pointLight position={[cx, 2.2, cz]} intensity={2.2} distance={4.5} color="#FFCF94" />}
-            {showHotspots && !selected && (
-              <Html position={[cx, roof && !cutaway ? 3.2 : 1.4, cz]} center zIndexRange={[20, 0]}>
-                <button
-                  type="button"
-                  onClick={() => onPick?.(r.id)}
-                  className="whitespace-nowrap border border-primary bg-card px-2.5 py-1.5 text-[13px] font-semibold text-primary shadow-sm hover:bg-primary hover:text-primary-foreground"
-                >
-                  {r.name}
-                </button>
-              </Html>
-            )}
+
           </group>
         );
       })}
@@ -481,11 +471,16 @@ export function House({ design, selected, hovered, roof, cutaway, evening, hidde
 
       {roof && !cutaway && !selected && (
         <group name="roof">
-          <B p={[0, WALL_H + 0.1, 0.5]} s={[8.8, 0.2, 7.8]} m={st.roof} />
-          <B p={[0, WALL_H + 0.1, -3.39]} s={[8.82, 0.24, 0.04]} m={st.fascia} />
-          <B p={[0, WALL_H + 0.1, 4.39]} s={[8.82, 0.24, 0.04]} m={st.fascia} />
-          <B p={[-1, WALL_H + 0.55, -1]} s={[6.4, 0.7, 3.6]} m={st.roof} />
-          <B p={[-1, WALL_H + 0.45, -2.81]} s={[6.0, 0.4, 0.02]} m={st.glass} />
+          {[-1, 1].map((side) => (
+            <group key={side} position={[side * 2.2, WALL_H + 0.65, 0.5]} rotation-z={side * -0.22}>
+              <B p={[0, 0, 0]} s={[4.5, 0.14, 7.8]} m={st.roof} />
+              {Array.from({ length: 40 }, (_, i) => (
+                <mesh key={i} position={[0, 0.1, -3.8 + i * 0.195]} rotation-z={Math.PI / 2} material={st.roof} castShadow>
+                  <cylinderGeometry args={[0.11, 0.11, 4.5, 8, 1, true, 0, Math.PI]} />
+                </mesh>
+              ))}
+            </group>
+          ))}
           <B p={[-5.2, 2.3, -1.2]} s={[2.6, 0.1, 3.8]} m={st.fascia} />
         </group>
       )}

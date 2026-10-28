@@ -9,16 +9,16 @@ const ft = (m: number) => Math.round(m * 3.28);
 
 export function FloorPlan({ selected, onSelect }: { selected: RoomId | null; onSelect: (id: RoomId) => void }) {
   return (
-    <div className="relative h-full min-h-[300px] w-full bg-card">
+    <div className="flex h-full min-h-[300px] w-full flex-col bg-card">
       <TransformWrapper minScale={0.8} maxScale={4} initialScale={1} centerOnInit wheel={{ step: 0.08 }} doubleClick={{ disabled: true }}>
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
-            <div className="absolute right-2 top-2 z-10 flex gap-1">
+            <div className="flex justify-end gap-1 border-b border-border p-1.5">
               <button type="button" className="btn btn-line bg-card px-3" onClick={() => zoomIn()} aria-label="Zoom in on plan">+</button>
               <button type="button" className="btn btn-line bg-card px-3" onClick={() => zoomOut()} aria-label="Zoom out on plan">−</button>
               <button type="button" className="btn btn-line bg-card" onClick={() => resetTransform()}>Reset plan</button>
             </div>
-            <TransformComponent wrapperStyle={{ width: "100%", height: "100%", minHeight: 300 }} contentStyle={{ width: "100%", height: "100%" }}>
+            <TransformComponent wrapperStyle={{ width: "100%", flex: 1, minHeight: 240 }} contentStyle={{ width: "100%", height: "100%" }}>
               <svg viewBox={`0 0 ${8 * S + PAD * 2} ${7 * S + PAD * 2}`} className="h-full w-full" role="group" aria-label="Floor plan. Select a room.">
                 <defs>
                   <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">

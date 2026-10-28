@@ -89,6 +89,13 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
   const [compare, setCompare] = useState(false);
   const [msg, setMsg] = useState("");
   const rig = useRef<RigApi>(null);
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const wrap = useRef<HTMLDivElement>(null);
   const fullBtn = useRef<HTMLButtonElement>(null);
   const sel = s.selected;
@@ -197,9 +204,12 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
             aria-label="3D view. Arrow keys rotate, plus and minus zoom."
             data-scene-ready={ready ? "" : undefined}
           >
-            {s.mode === "plan" || !canUse3D ? (
-              <FloorPlan selected={sel} onSelect={(id) => select(id)} />
-            ) : (
+            {(s.mode === "plan" || !canUse3D) && (
+              <div className="absolute inset-0 z-10">
+                <FloorPlan selected={sel} onSelect={(id) => select(id)} />
+              </div>
+            )}
+            {canUse3D && (
               <Boundary onError={() => setFailed(true)}>
                 <Suspense fallback={<div className="flex h-full items-center justify-center text-muted-foreground">Loading the 3D home…</div>}>
                   <Scene
@@ -210,11 +220,11 @@ export default function Viewer({ initialRoom, compact }: { initialRoom?: RoomId 
                     roof={s.roof}
                     cutaway={s.cutaway}
                     evening={s.evening}
-                    active={visible}
+                    active={visible && s.mode === "3d"}
                     reduced={reduceMotion}
                     onPick={(id) => select(id)}
                     onHover={setHovered}
-                    onLost={() => setFailed(true)}
+                    onLost={() => mounted.current && setFailed(true)}
                     onReady={() => setReady(true)}
                   />
                 </Suspense>

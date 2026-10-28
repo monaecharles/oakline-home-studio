@@ -34,7 +34,7 @@ export const ROOMS: Room[] = [
     blurb:
       "An L-shaped cabinet run along the back and east walls with a freestanding island facing the living room. The island seats three and keeps the cook in the conversation.",
     photo: "oakline-06",
-    camera: { position: [0.4, 1.7, 0.7], target: [3, 0.8, -2.2] },
+    camera: { position: [0.1, 2.0, 0.9], target: [2.7, 0.7, -2.3] },
   },
   {
     id: "bedroom",

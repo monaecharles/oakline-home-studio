@@ -7,7 +7,7 @@ import { House, occludingWalls } from "./House";
 import { roomById, type DesignState, type RoomId } from "@/lib/rooms";
 import { disposeTextures } from "./textures";
 
-export const HOME_VIEW = { position: [9.5, 8.5, 11] as [number, number, number], target: [0, 0.6, 0.5] as [number, number, number] };
+import { HOME_VIEW } from "./scene-constants";
 
 export interface RigApi {
   rotate: (dir: 1 | -1) => void;

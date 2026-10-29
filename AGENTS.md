@@ -17,3 +17,4 @@
 
 - Material photo sources are centralized in src/lib/material-photos.ts and imported through asset pointers so labels and attribution share one registry.
 - Pre-optimize public hook-using control dependencies and reject outdated Vite dependency requests so a live preview cannot mix React dispatcher generations after edits.
+- Matterport finish overlays live in src/lib/matterport-floor-test.ts + src/components/site/matterport/; gated off until SDK key, bundle and measured geometry exist, so the public tour embed stays untouched.

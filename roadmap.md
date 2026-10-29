@@ -10,3 +10,4 @@
 - [x] Matterport tour replaces 3D model on /explore-home, with room list, finish swatches, schedule download and inquiry transfer beside it
 - [ ] Finish changes painted onto the real tour: blocked, needs a paid Matterport SDK key
 - [ ] Kitchen floor overlay feasibility test (Bundle SDK): prepared and disabled; blocked on SDK key, bundle download, owner permission and measured kitchen floor geometry
+- [x] Explore page: Matterport tour, then a real 360° room with floor/wall finishes; real-kitchen restyle with before/after slider on Materials

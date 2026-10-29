@@ -31,7 +31,7 @@ void main(){
 function load(url: string, repeat = false) {
   return new Promise<THREE.Texture>((res, rej) => new THREE.TextureLoader().load(url, (t) => {
     t.colorSpace = THREE.NoColorSpace; // composite in photo space; output untouched
-    if (repeat) { t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping; t.anisotropy = 8; }
+    if (repeat) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; }
     res(t);
   }, undefined, rej));
 }

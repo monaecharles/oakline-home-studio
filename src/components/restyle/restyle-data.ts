@@ -8,6 +8,9 @@ import kWhiteDark from "@/assets/restyle/kitchen-white-dark.jpg.asset.json";
 import kGreenDark from "@/assets/restyle/kitchen-green-dark.jpg.asset.json";
 import kWalnutDark from "@/assets/restyle/kitchen-walnut-dark.jpg.asset.json";
 import { MATERIAL_PHOTOS } from "@/lib/material-photos";
+import planksLight from "@/assets/restyle/planks-light.jpg.asset.json";
+import planksDark from "@/assets/restyle/planks-dark.jpg.asset.json";
+import stoneTiles from "@/assets/restyle/stone-tiles.jpg.asset.json";
 
 export const PANO = {
   url: pano.url,
@@ -18,14 +21,14 @@ export const PANO = {
   source: "https://polyhaven.com/a/small_empty_house",
 };
 
-export interface PanoFloor { id: string; name: string; tex: string | null; scale: number; designId?: string }
+export interface PanoFloor { id: string; name: string; tex: string | null; swatch: string | null; scale: number; designId?: string }
 export interface PanoWall { id: string; name: string; color: string | null; designId?: string }
 
 export const PANO_FLOORS: PanoFloor[] = [
-  { id: "original", name: "Original tile", tex: null, scale: 1 },
-  { id: "light", name: "Light wood", tex: MATERIAL_PHOTOS.lightWood.url, scale: 1.6, designId: "oak" },
-  { id: "dark", name: "Rich brown wood", tex: MATERIAL_PHOTOS.darkWood.url, scale: 1.6, designId: "walnut" },
-  { id: "stone", name: "Pale stone tile", tex: MATERIAL_PHOTOS.tile.url, scale: 0.8, designId: "limestone" },
+  { id: "original", name: "Original tile", tex: null, swatch: null, scale: 1 },
+  { id: "light", name: "Light wood", tex: planksLight.url, swatch: MATERIAL_PHOTOS.lightWood.url, scale: 0.9, designId: "oak" },
+  { id: "dark", name: "Rich brown wood", tex: planksDark.url, swatch: MATERIAL_PHOTOS.darkWood.url, scale: 0.9, designId: "walnut" },
+  { id: "stone", name: "Pale stone tile", tex: stoneTiles.url, swatch: MATERIAL_PHOTOS.tile.url, scale: 0.55, designId: "limestone" },
 ];
 
 export const PANO_WALLS: PanoWall[] = [

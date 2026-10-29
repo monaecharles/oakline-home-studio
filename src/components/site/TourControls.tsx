@@ -4,13 +4,13 @@ import { designStore, useDesign, INQUIRY_PREFILL_KEY } from "@/lib/design-store"
 import { ROOMS, designSummary, finishSchedule, roomById } from "@/lib/rooms";
 import { download } from "@/lib/download";
 import { Button } from "@/components/ui/button";
-import { Swatches } from "@/components/three/Swatches";
+import { Swatches } from "@/components/three/Viewer";
 
 export function TourControls() {
   const s = useDesign();
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
-  useEffect(() => { designStore.hydrate(); if (!designStore.get?.().selected) designStore.select("living"); }, []);
+  useEffect(() => { designStore.hydrate(); if (!designStore.get().selected) designStore.select("living"); }, []);
   const room = roomById(s.selected);
 
   const toInquiry = () => {

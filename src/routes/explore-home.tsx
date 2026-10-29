@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MatterportTour } from "@/components/site/MatterportTour";
+import { KitchenFloorTest } from "@/components/site/matterport/KitchenFloorTest";
 import { PageIntro } from "@/components/site/Figure";
 import { pageHead } from "@/lib/site-config";
 
@@ -14,6 +15,7 @@ function Explore() {
       Walk through a real home room by room, look around each space and move at your own pace.
     </PageIntro>
     <MatterportTour />
+    <KitchenFloorTest />
     <section className="wrap pb-12">
       <h2 className="text-[28px]">Your material inspiration board</h2>
       <p className="mt-3 max-w-2xl text-muted-foreground">Collect photographs of finishes for your own project. Your saved choices stay in this browser.</p>

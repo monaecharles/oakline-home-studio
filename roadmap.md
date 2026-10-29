@@ -9,3 +9,4 @@
 - [ ] Confirm uninterrupted YouTube playback: external verification is blocked by YouTube's automated-browser challenge; the branded player and persistent original-video fallback are present.
 - [x] Matterport tour replaces 3D model on /explore-home, with room list, finish swatches, schedule download and inquiry transfer beside it
 - [ ] Finish changes painted onto the real tour: blocked, needs a paid Matterport SDK key
+- [ ] Kitchen floor overlay feasibility test (Bundle SDK): prepared and disabled; blocked on SDK key, bundle download, owner permission and measured kitchen floor geometry

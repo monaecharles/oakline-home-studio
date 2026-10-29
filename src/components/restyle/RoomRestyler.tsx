@@ -99,7 +99,7 @@ export function RoomRestyler() {
             <div className="mt-3 grid gap-2">
               {PANO_FLOORS.map((o) => (
                 <Swatch key={o.id} active={floor === o.id} label={o.name} onClick={() => setFloor(o.id)}>
-                  {o.tex ? <img src={o.tex} alt="" className="size-8 object-cover" /> : <span className="size-8 bg-[url(var(--pano-tile))] bg-muted" aria-hidden />}
+                  {o.tex ? <img src={o.tex} alt="" className="size-8 object-cover" /> : <span className="size-8 border border-border" style={{ background: "#E6DCCB" }} aria-hidden />}
                 </Swatch>
               ))}
             </div>

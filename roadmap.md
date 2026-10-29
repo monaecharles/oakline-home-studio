@@ -7,3 +7,5 @@
 - [x] Keep saved material choices in a separate inspiration board.
 - [x] Verify player renders, original-video link opens, saved material persistence/reset, labeled controls, and all eight pages at mobile/desktop sizes. Eight tests pass. Not published.
 - [ ] Confirm uninterrupted YouTube playback: external verification is blocked by YouTube's automated-browser challenge; the branded player and persistent original-video fallback are present.
+- [x] Matterport tour replaces 3D model on /explore-home, with room list, finish swatches, schedule download and inquiry transfer beside it
+- [ ] Finish changes painted onto the real tour: blocked, needs a paid Matterport SDK key

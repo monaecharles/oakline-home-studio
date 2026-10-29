@@ -58,7 +58,7 @@ const KITCHEN: Record<`${CabinetId}-${CounterId}`, string> = {
 };
 export const KITCHEN_ORIGINAL = kOrig.url;
 export const kitchenImage = (cab: CabinetId, ctr: CounterId) => KITCHEN[`${cab}-${ctr}`];
-export const KITCHEN_CREDIT = { label: "Kitchen photograph from Unsplash", source: "https://unsplash.com/photos/45b7abe8b7e1" };
+export const KITCHEN_CREDIT = { label: "Kitchen photograph from Unsplash", source: "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1" };
 
 export function hexToRgb(hex: string): [number, number, number] {
   const n = parseInt(hex.replace("#", ""), 16);

@@ -36,6 +36,9 @@ function load(url: string, repeat = false) {
   }, undefined, rej));
 }
 
+const uni = (m: THREE.ShaderMaterial) => m.uniforms as unknown as U;
+type U = Record<"base" | "mask" | "floorTex" | "floorOn" | "wallOn" | "floorAvg" | "wallAvg" | "scale" | "wallColor", THREE.IUniform>;
+
 function Room({ view, floorTex, floorScale, wall, showOriginal, onReady, onError }: Props) {
   const { camera, invalidate } = useThree();
   const mat = useMemo(() => new THREE.ShaderMaterial({
@@ -49,20 +52,20 @@ function Room({ view, floorTex, floorScale, wall, showOriginal, onReady, onError
   useEffect(() => {
     let live = true;
     Promise.all([load(PANO.url), load(PANO.maskUrl)]).then(([b, m]) => {
-      if (!live) return; mat.uniforms.base!.value = b; mat.uniforms.mask!.value = m; invalidate(); onReady();
+      if (!live) return; uni(mat).base.value = b; uni(mat).mask.value = m; invalidate(); onReady();
     }, onError);
     const cache = texCache.current;
-    return () => { live = false; geo.dispose(); mat.dispose(); cache.forEach((t) => t.dispose()); (mat.uniforms.base!.value as THREE.Texture | null)?.dispose(); (mat.uniforms.mask!.value as THREE.Texture | null)?.dispose(); };
+    return () => { live = false; geo.dispose(); mat.dispose(); cache.forEach((t) => t.dispose()); (uni(mat).base.value as THREE.Texture | null)?.dispose(); (uni(mat).mask.value as THREE.Texture | null)?.dispose(); };
   }, [mat, geo, invalidate, onReady, onError]);
 
   useEffect(() => {
-    const u = mat.uniforms;
-    u.wallOn!.value = wall && !showOriginal ? 1 : 0;
-    if (wall) { const [r, g, b] = hexToRgb(wall); (u.wallColor!.value as THREE.Vector3).set(r, g, b); }
-    if (!floorTex || showOriginal) { u.floorOn!.value = 0; invalidate(); return; }
+    const u = uni(mat);
+    u.wallOn.value = wall && !showOriginal ? 1 : 0;
+    if (wall) { const [r, g, b] = hexToRgb(wall); (u.wallColor.value as THREE.Vector3).set(r, g, b); }
+    if (!floorTex || showOriginal) { u.floorOn.value = 0; invalidate(); return; }
     const hit = texCache.current.get(floorTex);
-    const apply = (t: THREE.Texture) => { u.floorTex!.value = t; u.scale!.value = floorScale; u.floorOn!.value = 1; invalidate(); };
-    if (hit) apply(hit); else load(floorTex, true).then((t) => { texCache.current.set(floorTex, t); apply(t); }, () => { u.floorOn!.value = 0; invalidate(); });
+    const apply = (t: THREE.Texture) => { u.floorTex.value = t; u.scale.value = floorScale; u.floorOn.value = 1; invalidate(); };
+    if (hit) apply(hit); else load(floorTex, true).then((t) => { texCache.current.set(floorTex, t); apply(t); }, () => { u.floorOn.value = 0; invalidate(); });
   }, [floorTex, floorScale, wall, showOriginal, mat, invalidate]);
 
   useFrame(() => {

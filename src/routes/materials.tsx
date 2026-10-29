@@ -8,6 +8,7 @@ import { designStore, useDesign } from "@/lib/design-store";
 import { materialPhoto } from "@/lib/material-photos";
 import { FINISHES, ROOMS, type Category } from "@/lib/rooms";
 import { pageHead } from "@/lib/site-config";
+import { KitchenRestyle } from "@/components/restyle/KitchenRestyle";
 
 export const Route = createFileRoute("/materials")({
   head: () =>
@@ -66,8 +67,9 @@ function Materials() {
   return (
     <>
       <PageIntro eyebrow="Material library" title="Materials & Finishes">
-        Photographic references for your own home. These are representative material samples, not specified products. Your saved choices appear in the interactive 3D model, but do not change the house in the filmed reference.
+        Photographs of real materials for your own home. These are references, not specified products. Try cabinets and counters on a real kitchen, then save choices room by room.
       </PageIntro>
+      <KitchenRestyle />
       <section className="wrap mt-8" aria-labelledby="board-title">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h2 id="board-title" className="text-[28px]">Your inspiration board</h2>
@@ -106,7 +108,7 @@ function Materials() {
                       <MaterialPhoto category={cat} id={o.id} />
                       <h3 className="mt-3 font-display text-[20px]">{o.name}</h3>
                       <p className="mt-1 text-[15px] text-muted-foreground">{o.note}</p>
-                      <a className="mt-2 text-[12px] text-muted-foreground underline underline-offset-4" href={materialPhoto(cat, o.id).source} target="_blank" rel="noopener noreferrer">Representative material sample · Photo source</a>
+                      <a className="mt-2 text-[12px] text-muted-foreground underline underline-offset-4" href={materialPhoto(cat, o.id).source} target="_blank" rel="noopener noreferrer">Photo source</a>
                       <label className="mt-3 text-[14px] font-semibold" htmlFor={`apply-${cat}-${o.id}`}>Save for room</label>
                       <div className="mt-1 flex flex-wrap gap-2">
                         <select id={`apply-${cat}-${o.id}`} className="field min-w-0 basis-full text-[15px]" defaultValue={rooms[0]?.id}>
